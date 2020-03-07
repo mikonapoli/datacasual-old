@@ -1,10 +1,165 @@
-<h1 id="private-fastpages-on-k8s">Private FastPages on K8S</h1>
-<blockquote>
-  <p>How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace</p>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Private Fastpages On Kubernetes | datacasual</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Private Fastpages On Kubernetes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace" />
+<meta property="og:description" content="How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace" />
+<link rel="canonical" href="https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html" />
+<meta property="og:url" content="https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html" />
+<meta property="og:site_name" content="datacasual" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"dateModified":"2020-03-07T00:00:00-06:00","description":"How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html"},"url":"https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html","headline":"Private Fastpages On Kubernetes","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://datacasual.com/feed.xml" title="datacasual" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Private Fastpages On Kubernetes | datacasual</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Private Fastpages On Kubernetes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace" />
+<meta property="og:description" content="How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace" />
+<link rel="canonical" href="https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html" />
+<meta property="og:url" content="https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html" />
+<meta property="og:site_name" content="datacasual" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"dateModified":"2020-03-07T00:00:00-06:00","description":"How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html"},"url":"https://datacasual.com/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html","headline":"Private Fastpages On Kubernetes","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
 
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://datacasual.com/feed.xml" title="datacasual" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    // remove paragraph tags in rendered toc (happens from notebooks)
+    var toctags = document.querySelectorAll(".toc-entry")
+    toctags.forEach(e => (e.firstElementChild.innerText = e.firstElementChild.innerText.replace('¶', '')))
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">datacasual</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Private Fastpages On Kubernetes</h1><p class="page-description">How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#fastpages">fastpages</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#kubernetes">kubernetes</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#private-fastpages-on-k8s">Private FastPages on K8S</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#context">Context</a></li>
+<li class="toc-entry toc-h2"><a href="#summary-andor-tldr">Summary (and/or TL;DR)</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#requirements">Requirements</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#setting-up-fastpages">Setting up FastPages</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#gotchas-and-other-optional-steps">Gotchas and other optional steps</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#deploying-the-server">Deploying the server</a></li>
+<li class="toc-entry toc-h2"><a href="#making-the-server-accessible">Making the server accessible</a></li>
+<li class="toc-entry toc-h2"><a href="#parting-thoughts">Parting thoughts</a></li>
+</ul>
+</li>
+</ul><h1 id="private-fastpages-on-k8s">
+<a class="anchor" href="#private-fastpages-on-k8s" aria-hidden="true"><span class="octicon octicon-link"></span></a>Private FastPages on K8S</h1>
+<p>This post is the very reason I decided myself to go back to blogging. I managed to do something that I considered relatively trivial, but let others know about it in the Fast.ai forums it turned out not to be that obvious after all. And writing about it, I realised that not even a year ago, I wouldn’t have had the faintest idea of what I am talking about here.</p>
+
+<p>So, without further ado..</p>
+
+<blockquote>
+  <p>How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace.</p>
 </blockquote>
 
-<h2 id="context">Context</h2>
+<h2 id="context">
+<a class="anchor" href="#context" aria-hidden="true"><span class="octicon octicon-link"></span></a>Context</h2>
 <blockquote>
   <p>Note: if you are not part of a mid-large company IT department, the following paragraph might sound like a bunch of corporate lingo that makes no sense. It is not completely true, but if you have no idea what I am talking about, just skip it.</p>
 
@@ -13,7 +168,8 @@
 
 <p>Since I am a bit of a Fast.ai fanboy and I am using Jupyter a lot in my data work, when fast_template/FastPages was presented, I started thinking about how to deploy it for my use case. The main blocker was that GitHub pages are always public, even on private repos, which would have been a showstopper, as we don’t want to police a self serving tool to check that no important information is being shared publicly.</p>
 
-<h2 id="summary-andor-tldr">Summary (and/or TL;DR)</h2>
+<h2 id="summary-andor-tldr">
+<a class="anchor" href="#summary-andor-tldr" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary (and/or TL;DR)</h2>
 
 <p>In order to deploy FastPages privately on a Kubernetes cluster you need to:</p>
 <ol>
@@ -25,7 +181,8 @@
 
 <p>While steps 1-3 are fairly straightforward, the last step depends heavily on your cluster configuration and policies. I will give a very high level description of what I did, but you will have to do your own research to make it work in your case.</p>
 
-<h3 id="requirements">Requirements</h3>
+<h3 id="requirements">
+<a class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h3>
 <p>This guide is not too beginner friendly and it is not meant to be: since the risk of getting it wrong is exposing private information, you need to have some working knowledge of what you are doing or at least some way of making sure that you are not doing huge mistakes (like a SRE/DevOps person to review what you are doing). Other than that you need</p>
 <ul>
   <li>Access and admin privileges to private GitHub repos</li>
@@ -39,7 +196,8 @@
 
 </blockquote>
 
-<h2 id="setting-up-fastpages">Setting up FastPages</h2>
+<h2 id="setting-up-fastpages">
+<a class="anchor" href="#setting-up-fastpages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up FastPages</h2>
 
 <p>First of all you have to setup your FastPages repo. Just follow the <a href="https://github.com/fastai/fastpages#setup-instructions">latest instructions</a> (keep in mind that the tool is under active development, so those might change quite often); this will trigger a GitHub action that will open a PR. Before following the instructions in the PR, there is a few things to do to avoid fastpages publishing private stuff by mistake.</p>
 <ol>
@@ -72,12 +230,15 @@ with:
 
 <p>This is all that is needed on the FastPages side of things.</p>
 
-<h3 id="gotchas-and-other-optional-steps">Gotchas and other optional steps</h3>
+<h3 id="gotchas-and-other-optional-steps">
+<a class="anchor" href="#gotchas-and-other-optional-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gotchas and other optional steps</h3>
 <p>If you want the website to function in any useful way, you will have to set up an internal domain. How to do so depends heavily on how the DNS and network policies are setup in your Kubernetes cluster. If your domain is going to be, for example <code class="highlighter-rouge">shiny.private.website</code>, you want to make sure to  that</p>
 <ul>
-  <li>Your CNAME file (so that the categories work properly, for example) contains <code class="highlighter-rouge">shiny.private.website</code></li>
+  <li>Your CNAME file (so that the categories work properly, for example) contains <code class="highlighter-rouge">shiny.private.website</code>
+</li>
   <li>The <code class="highlighter-rouge">_config.yml</code> file contains
-    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://shiny.private.website"</span> <span class="c1"># the base hostname &amp; protocol for your site, e.g. http://example.com</span>
+    <div class="language-yaml highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://shiny.private.website"</span> <span class="c1"># the base hostname &amp; protocol for your site, e.g. http://example.com</span>
 <span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
 </code></pre></div>    </div>
   </li>
@@ -87,7 +248,8 @@ with:
 
 <p>Don’t do it later as I did. It’s a pain to solve the merge conflicts.</p>
 
-<h2 id="deploying-the-server">Deploying the server</h2>
+<h2 id="deploying-the-server">
+<a class="anchor" href="#deploying-the-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploying the server</h2>
 <p>Since Jekyll builds a complete static website and the github action pushes it to the branch we have set up in the step above, we only need something capable of serving it. I have used a basic <a href="https://hub.docker.com/_/nginx">Nginx alpine</a> image, but there are probably a thousand different options. In order to avoid having to redeploy the server manually everytime, furthermore, we want to add a <a href="https://github.com/kubernetes/git-sync">git-sync</a> sidecar that pulls the website branch into the served folder of the Nginx container and keeps it up to date. There are a few possible variations but this is how more or less how the manifest would look like</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
@@ -200,7 +362,8 @@ with:
 
 </blockquote>
 
-<h2 id="making-the-server-accessible">Making the server accessible</h2>
+<h2 id="making-the-server-accessible">
+<a class="anchor" href="#making-the-server-accessible" aria-hidden="true"><span class="octicon octicon-link"></span></a>Making the server accessible</h2>
 <p>In order to be expose the served webpages there are probably a couple more resources to be deployed. Both of these are dependent on how your Kubernetes cluster has been set up, so there is not much I can do to help you. In order to make everything work you need</p>
 <ol>
   <li>An <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> to expose the HTTP route to the DNS and within the cluster</li>
@@ -209,5 +372,39 @@ with:
 
 <p>Once again, if you don’t knwo how to do this, you will have to consult your SRE/DevOps/SystemAdmin team or whoever is maintaining the cluster. Please don’t follow the advice of a random Data Scientist to set up network policies for potentially sensitive resources.</p>
 
-<h2 id="parting-thoughts">Parting thoughts</h2>
+<h2 id="parting-thoughts">
+<a class="anchor" href="#parting-thoughts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parting thoughts</h2>
 <p>If you are reading this, you should at this point have a deployed fastpages powered private website on your Kubernetes cluster. Although the recipe is quite verbose, depending on your experience with Kubernetes, the steps might be all quite familiar. If that is not the case, I hope you managed to at least an idea of what is going on.</p>
+
+  </div><a class="u-url" href="/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Tales of an accidental data scientist.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/mikonapoli" title="mikonapoli"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/micbucci" title="micbucci"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
