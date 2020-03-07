@@ -152,19 +152,14 @@ window.onload = wrap_img;
 <a class="anchor" href="#private-fastpages-on-k8s" aria-hidden="true"><span class="octicon octicon-link"></span></a>Private FastPages on K8S</h1>
 <p>This post is the very reason I decided myself to go back to blogging. I managed to do something that I considered relatively trivial, but let others know about it in the Fast.ai forums it turned out not to be that obvious after all. And writing about it, I realised that not even a year ago, I wouldn’t have had the faintest idea of what I am talking about here.</p>
 
-<p>So, without further ado..</p>
-
-<blockquote>
-  <p>How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace.</p>
-</blockquote>
-
 <h2 id="context">
 <a class="anchor" href="#context" aria-hidden="true"><span class="octicon octicon-link"></span></a>Context</h2>
-<blockquote>
-  <p>Note: if you are not part of a mid-large company IT department, the following paragraph might sound like a bunch of corporate lingo that makes no sense. It is not completely true, but if you have no idea what I am talking about, just skip it.</p>
+<div class="Toast Toast--warning googoo">
+   <span class="Toast-icon"><svg class="octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>
+   <span class="Toast-content">If you are not part of a mid-large company IT department, the following paragraph might sound like a bunch of corporate lingo that makes no sense. It is not completely true, but if you have no idea what I am talking about, just skip it.</span>
+</div>
 
-  <p>As a mathematician turned knowledge engineer turned product manager turned data scientist with a pench for learning new stuff, one of the many hats I tend to wear quite often is that of knowledge sharer. Since in my current role I am helping setting up a federated team of data analysts, one of the problems we need to solve is breaking the information siloes among data people. This way we can avoid duplicate work and we can piggyback on each others’ research in order to extract more advanced insights.</p>
-</blockquote>
+<p>As a mathematician turned knowledge engineer turned product manager turned data scientist with a pench for learning new stuff, one of the many hats I tend to wear quite often is that of knowledge sharer. Since in my current role I am helping setting up a federated team of data analysts, one of the problems we need to solve is breaking the information siloes among data people. This way we can avoid duplicate work and we can piggyback on each others’ research in order to extract more advanced insights.</p>
 
 <p>Since I am a bit of a Fast.ai fanboy and I am using Jupyter a lot in my data work, when fast_template/FastPages was presented, I started thinking about how to deploy it for my use case. The main blocker was that GitHub pages are always public, even on private repos, which would have been a showstopper, as we don’t want to police a self serving tool to check that no important information is being shared publicly.</p>
 
@@ -374,7 +369,9 @@ with:
 
 <h2 id="parting-thoughts">
 <a class="anchor" href="#parting-thoughts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parting thoughts</h2>
-<p>If you are reading this, you should at this point have a deployed fastpages powered private website on your Kubernetes cluster. Although the recipe is quite verbose, depending on your experience with Kubernetes, the steps might be all quite familiar. If that is not the case, I hope you managed to at least an idea of what is going on.</p>
+<p>If you are reading this, you should at this point have a deployment, or know how to get a fastpages powered private website on your Kubernetes cluster.</p>
+
+<p>I admit that the recipe is quite verbose,but depending on your experience with Kubernetes, these steps might be more or less familiar. If that is not the case, I hope you managed to at least get an idea of what is going on.</p>
 
   </div><a class="u-url" href="/fastpages/kubernetes/2020/03/07/private-fastpages-on-kubernetes.html" hidden></a>
 </article>
