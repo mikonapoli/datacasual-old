@@ -8,14 +8,10 @@ categories: [fastpages, kubernetes]
 # Private FastPages on K8S
 This post is the very reason I decided myself to go back to blogging. I managed to do something that I considered relatively trivial, but let others know about it in the Fast.ai forums it turned out not to be that obvious after all. And writing about it, I realised that not even a year ago, I wouldn't have had the faintest idea of what I am talking about here.
 
-So, without further ado..
-
->How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace.
- 
 
 ## Context
-> Note: if you are not part of a mid-large company IT department, the following paragraph might sound like a bunch of corporate lingo that makes no sense. It is not completely true, but if you have no idea what I am talking about, just skip it.
-> 
+{% include alert.html text="If you are not part of a mid-large company IT department, the following paragraph might sound like a bunch of corporate lingo that makes no sense. It is not completely true, but if you have no idea what I am talking about, just skip it." %}
+
 As a mathematician turned knowledge engineer turned product manager turned data scientist with a pench for learning new stuff, one of the many hats I tend to wear quite often is that of knowledge sharer. Since in my current role I am helping setting up a federated team of data analysts, one of the problems we need to solve is breaking the information siloes among data people. This way we can avoid duplicate work and we can piggyback on each others' research in order to extract more advanced insights. 
 
 Since I am a bit of a Fast.ai fanboy and I am using Jupyter a lot in my data work, when fast_template/FastPages was presented, I started thinking about how to deploy it for my use case. The main blocker was that GitHub pages are always public, even on private repos, which would have been a showstopper, as we don't want to police a self serving tool to check that no important information is being shared publicly.
@@ -202,4 +198,6 @@ In order to be expose the served webpages there are probably a couple more resou
 Once again, if you don't knwo how to do this, you will have to consult your SRE/DevOps/SystemAdmin team or whoever is maintaining the cluster. Please don't follow the advice of a random Data Scientist to set up network policies for potentially sensitive resources.
 
 ## Parting thoughts
-If you are reading this, you should at this point have a deployed fastpages powered private website on your Kubernetes cluster. Although the recipe is quite verbose, depending on your experience with Kubernetes, the steps might be all quite familiar. If that is not the case, I hope you managed to at least an idea of what is going on.
+If you are reading this, you should at this point have a deployment, or know how to get a fastpages powered private website on your Kubernetes cluster. 
+
+I admit that the recipe is quite verbose,but depending on your experience with Kubernetes, these steps might be more or less familiar. If that is not the case, I hope you managed to at least get an idea of what is going on.
