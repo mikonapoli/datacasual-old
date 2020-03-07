@@ -1,0 +1,213 @@
+<h1 id="private-fastpages-on-k8s">Private FastPages on K8S</h1>
+<blockquote>
+  <p>How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace</p>
+
+</blockquote>
+
+<h2 id="context">Context</h2>
+<blockquote>
+  <p>Note: if you are not part of a mid-large company IT department, the following paragraph might sound like a bunch of corporate lingo that makes no sense. It is not completely true, but if you have no idea what I am talking about, just skip it.</p>
+
+  <p>As a mathematician turned knowledge engineer turned product manager turned data scientist with a pench for learning new stuff, one of the many hats I tend to wear quite often is that of knowledge sharer. Since in my current role I am helping setting up a federated team of data analysts, one of the problems we need to solve is breaking the information siloes among data people. This way we can avoid duplicate work and we can piggyback on each others’ research in order to extract more advanced insights.</p>
+</blockquote>
+
+<p>Since I am a bit of a Fast.ai fanboy and I am using Jupyter a lot in my data work, when fast_template/FastPages was presented, I started thinking about how to deploy it for my use case. The main blocker was that GitHub pages are always public, even on private repos, which would have been a showstopper, as we don’t want to police a self serving tool to check that no important information is being shared publicly.</p>
+
+<h2 id="summary-andor-tldr">Summary (and/or TL;DR)</h2>
+
+<p>In order to deploy FastPages privately on a Kubernetes cluster you need to:</p>
+<ol>
+  <li>Change the branch to which the website built by Jekyll is pushed</li>
+  <li>Deploy a static webpage server (I used Nginx) with a Git-sync sidecar to keep the served site up to date</li>
+  <li>Makesure the sidecar can pull the fastpages repo with a read only deploy key</li>
+  <li>Expose the server internally with appropriate network policies and ingress configurations</li>
+</ol>
+
+<p>While steps 1-3 are fairly straightforward, the last step depends heavily on your cluster configuration and policies. I will give a very high level description of what I did, but you will have to do your own research to make it work in your case.</p>
+
+<h3 id="requirements">Requirements</h3>
+<p>This guide is not too beginner friendly and it is not meant to be: since the risk of getting it wrong is exposing private information, you need to have some working knowledge of what you are doing or at least some way of making sure that you are not doing huge mistakes (like a SRE/DevOps person to review what you are doing). Other than that you need</p>
+<ul>
+  <li>Access and admin privileges to private GitHub repos</li>
+  <li>The ability of running GitHub actions on the private repos</li>
+  <li>A Kubernetes cluster set up with appropriate network policies and DNS</li>
+  <li>A namespace that can access the private GitHub repo. This is usually the case, but if your cluster is super locked down, it might not be possible</li>
+</ul>
+
+<blockquote>
+  <p>Important: to make the deployment, you need to know your way around Kubernetes. You just need to know how to use it and deploy/manage resources into it, you don’t need cluster admin knowledge of any kind</p>
+
+</blockquote>
+
+<h2 id="setting-up-fastpages">Setting up FastPages</h2>
+
+<p>First of all you have to setup your FastPages repo. Just follow the <a href="https://github.com/fastai/fastpages#setup-instructions">latest instructions</a> (keep in mind that the tool is under active development, so those might change quite often); this will trigger a GitHub action that will open a PR. Before following the instructions in the PR, there is a few things to do to avoid fastpages publishing private stuff by mistake.</p>
+<ol>
+  <li>Set a <a href="https://help.github.com/en/enterprise/2.15/admin/developer-workflow/configuring-protected-branches-and-required-status-checks">branch protection rule</a> to make sure that at least two approving reviews are required to push to the <code class="highlighter-rouge">gh-pages</code>. This is because by default, as soon as something is pushed to the <code class="highlighter-rouge">gh-pages</code> branch, it gets published on GitHub pages. As far as I know, there is no way to prevent this behaviour.</li>
+  <li>Checkout into the branch that has been opened by the Setup action (the one that the open PR is attempting to merge into master) and modify the <code class="highlighter-rouge">.github/workflows/ci.yaml</code> from this
+```yaml
+    <ul>
+      <li>name: Deploy
+if: github.event_name	== ‘push’
+uses: peaceiris/actions-gh-pages@v3
+with:
+  deploy_key: $
+  publish_dir: ./_site
+<code class="highlighter-rouge">
+to something like this (you can pick whatever branch name you want)
+</code>yaml</li>
+      <li>name: Deploy
+if: github.event_name	== ‘push’
+uses: peaceiris/actions-gh-pages@v3
+with:
+  deploy_key: $
+  publish_branch: private-website-branch
+  publish_dir: ./_site
+```</li>
+    </ul>
+  </li>
+</ol>
+
+<p>After this you are can continue setting up the repo according to the instructions in the PR.</p>
+
+<p>This is all that is needed on the FastPages side of things.</p>
+
+<h3 id="gotchas-and-other-optional-steps">Gotchas and other optional steps</h3>
+<p>If you want the website to function in any useful way, you will have to set up an internal domain. How to do so depends heavily on how the DNS and network policies are setup in your Kubernetes cluster. If your domain is going to be, for example <code class="highlighter-rouge">shiny.private.website</code>, you want to make sure to  that</p>
+<ul>
+  <li>Your CNAME file (so that the categories work properly, for example) contains <code class="highlighter-rouge">shiny.private.website</code></li>
+  <li>The <code class="highlighter-rouge">_config.yml</code> file contains
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://shiny.private.website"</span> <span class="c1"># the base hostname &amp; protocol for your site, e.g. http://example.com</span>
+<span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Before you merge the setup PR (or right after that), it is also a good idea to create an <code class="highlighter-rouge">upstream</code> branch and to set its remote to the <a href="https://github.com/fastai/fastpages.git">original FastPages repo</a>, so that you can keep your deployment in sync with the development of FastPages.</p>
+
+<p>Don’t do it later as I did. It’s a pain to solve the merge conflicts.</p>
+
+<h2 id="deploying-the-server">Deploying the server</h2>
+<p>Since Jekyll builds a complete static website and the github action pushes it to the branch we have set up in the step above, we only need something capable of serving it. I have used a basic <a href="https://hub.docker.com/_/nginx">Nginx alpine</a> image, but there are probably a thousand different options. In order to avoid having to redeploy the server manually everytime, furthermore, we want to add a <a href="https://github.com/kubernetes/git-sync">git-sync</a> sidecar that pulls the website branch into the served folder of the Nginx container and keeps it up to date. There are a few possible variations but this is how more or less how the manifest would look like</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">your-namespace</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+      <span class="na">matchLabels</span><span class="pi">:</span>
+          <span class="na">app</span><span class="pi">:</span> <span class="s">fastpages</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span> <span class="c1"># You can set this to something higher if needed</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+        <span class="na">labels</span><span class="pi">:</span>
+            <span class="na">app</span><span class="pi">:</span> <span class="s">fastpages</span>
+    <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">restartPolicy</span><span class="pi">:</span> <span class="s">Always</span>
+        <span class="na">securityContext</span><span class="pi">:</span>
+            <span class="na">fsGroup</span><span class="pi">:</span> <span class="m">65533</span> <span class="c1"># to make SSH key readable </span>
+        <span class="na">containers</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">fastpages</span>
+          <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:alpine</span>
+          <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">Always</span>
+          <span class="na">volumeMounts</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">site</span>
+            <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/usr/share/nginx/html</span>
+          <span class="pi">-</span> <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/etc/nginx/conf.d</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">fastpages-conf</span>
+          <span class="na">ports</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+            <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">limits</span><span class="pi">:</span>
+              <span class="na">memory</span><span class="pi">:</span> <span class="s">20Mi</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-sync</span>
+          <span class="na">image</span><span class="pi">:</span> <span class="s">k8s.gcr.io/git-sync</span>
+          <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
+          <span class="na">env</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">GIT_SYNC_REPO</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">git@github.com:your-githubname/yourprivaterepo.git"</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">GIT_SYNC_DEST</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">www"</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">GIT_SYNC_ROOT</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/site"</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">GIT_SYNC_SSH</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">GIT_SYNC_MAX_SYNC_FAILURES</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">5"</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">cpu</span><span class="pi">:</span> <span class="s">0m</span>
+              <span class="na">memory</span><span class="pi">:</span> <span class="s">0Mi</span>
+            <span class="na">limits</span><span class="pi">:</span>
+              <span class="na">memory</span><span class="pi">:</span> <span class="s">200Mi</span>
+          <span class="na">securityContext</span><span class="pi">:</span>
+            <span class="na">runAsUser</span><span class="pi">:</span> <span class="m">65533</span> <span class="c1"># git-sync user</span>
+          <span class="na">volumeMounts</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-secret</span>
+            <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/etc/git-secret</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">site</span>
+            <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/site</span>
+        <span class="na">volumes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">site</span>
+          <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
+        <span class="pi">-</span> <span class="na">configMap</span><span class="pi">:</span>
+            <span class="na">defaultMode</span><span class="pi">:</span> <span class="m">420</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">fastpages-conf</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">fastpages-conf</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-secret</span>
+          <span class="na">secret</span><span class="pi">:</span>
+            <span class="na">secretName</span><span class="pi">:</span> <span class="s">fastpages-git-ssh</span>
+            <span class="na">defaultMode</span><span class="pi">:</span> <span class="m">0400</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">fastpages</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">fastpages</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">http</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">fastpages-conf</span>
+    <span class="na">namespace</span><span class="pi">:</span> <span class="s">your-namespace</span>
+<span class="na">data</span><span class="pi">:</span>
+    <span class="s">default.conf</span><span class="pi">:</span> <span class="pi">|-</span>
+        <span class="s">server {</span>
+            <span class="s">listen       80;</span>
+            <span class="s">server_name _;</span>
+            <span class="s">root /usr/share/nginx/html/www/;</span>
+            <span class="s">access_log /dev/stdout;</span>
+        <span class="s">}</span>
+<span class="s">---</span>
+</code></pre></div></div>
+
+<p>Before deploying the above, generate a <a href="https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key">new SSH key pair</a> and create a <a href="https://kubernetes.io/docs/concepts/configuration/secret/#use-case-pod-with-ssh-keys">secret with the private key</a> in your namespace called <code class="highlighter-rouge">fastpages-git-ssh</code>. After that use the <strong>public</strong> key of the pair to create a new read only <a href="https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys">deploy key</a> on your FastPages repo.</p>
+
+<p>Once all this is done, you can deploy the above and you webserver container should start happily. Sadly, you will not be able to access it yet if your namespace has properly set policies.</p>
+
+<blockquote>
+  <p>Important: Please be careful of how you manage your secrets, don’t put them on GitHub unencrypted and don’t do anything weird.</p>
+
+</blockquote>
+
+<h2 id="making-the-server-accessible">Making the server accessible</h2>
+<p>In order to be expose the served webpages there are probably a couple more resources to be deployed. Both of these are dependent on how your Kubernetes cluster has been set up, so there is not much I can do to help you. In order to make everything work you need</p>
+<ol>
+  <li>An <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> to expose the HTTP route to the DNS and within the cluster</li>
+  <li>A <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">Netork Policy</a> to make sure that the deployed resources are allowed to communicate among them, if this is not already possible by default in your namespace</li>
+</ol>
+
+<p>Once again, if you don’t knwo how to do this, you will have to consult your SRE/DevOps/SystemAdmin team or whoever is maintaining the cluster. Please don’t follow the advice of a random Data Scientist to set up network policies for potentially sensitive resources.</p>
+
+<h2 id="parting-thoughts">Parting thoughts</h2>
+<p>If you are reading this, you should at this point have a deployed fastpages powered private website on your Kubernetes cluster. Although the recipe is quite verbose, depending on your experience with Kubernetes, the steps might be all quite familiar. If that is not the case, I hope you managed to at least an idea of what is going on.</p>
