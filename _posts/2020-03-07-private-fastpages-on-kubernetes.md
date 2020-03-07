@@ -1,5 +1,5 @@
 ---
-title: "Private FastPages on K8S"
+title: "Private FastPages on Kubernetes"
 summary: "How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace"
 toc: true
 categories: [fastpages, kubernetes]
