@@ -78,7 +78,7 @@ A quanto pare, se state incubando COVID-19, le persone a cui tenete vi saranno g
 
 Ecco un piccolo esperimento di Jeremy sul controllo alla fonte!
 
-{% include youtubePlayer.html id="F0RcH9DfuyE" %}
+ include youtubePlayer.html id="F0RcH9DfuyE" 
 
 ## Riferimenti
 
