@@ -1,4 +1,5 @@
 ---
+title: "[ITALIAN] Tutti in maschera? La scienza dice sì|
 description: "Traduzione di 'Masks for all? The science says yes.' di Trisha Greenhalgh OBE e Jeremy Howard"
 toc: true
 layout: post
@@ -6,7 +7,6 @@ image: images/2020-04-19-tutti-in-maschera/image1.png
 categories: [italian, covid19]
 ---
 
-# [ITALIAN] Tutti in maschera? La scienza dice sì
 Tradotto dall'[originale](https://www.fast.ai/2020/04/13/masks-summary/) del prof. Trisha Greenhalgh OBE e di Jeremy Howard
 
 Non sapete cosa pensare a proposito delle mascherine? Certo, è una questione complicata, ma meno di quanto alcuni lascino intendere. Abbiamo esaminato la scienza disponibile (cfr. il nostro articolo [Face Masks Against COVID-19: An Evidence Review](http://up.fm/masks) &mdash; con non meno di 84 riferimenti bibliografici! &mdash; e [Face masks for the public during the covid-19 crisis](https://www.bmj.com/content/369/bmj.m1435)). In questo post riassiumiamo il punto di vista di diverse aree di ricerca, con la nostra interpretazione della faccenda.
@@ -22,7 +22,7 @@ Quando parliamo, minuscole goccioline vengono espulse dalla bocca. Per una perso
 
 Questo vuol dire che è molto più semplice bloccare le goccioline appena fuori dalla bocca, quando sono molto più grandi, piuttosto che bloccarle quando raggiungono la faccia e le mucose di una persona non contagiata che viene colpita da queste goccioline. Ma per qualche motivo, questo non è quello su cui gran parte dei ricercatori si è concentrata...
 
-## La scienza dei materiali delle mascherine
+## Mascherine e scienze dei materiali
 
 I dibattiti sull'efficacia delle mascherine spesso partono dal presupposto che lo scopo della mascherina è di proteggere che la porta, visto che è quello su cui ci si concentra e si insegna durante la formazione dei medici. In questo le mascherine di stoffa offrono una protezione scadente (pur non essendo del tutto inutili). Per avere una protezione del 100%, *chi indossa la mascherina* deve avere un respiratore medico (tipo N95) adeguatamente indossato. Ma mascherine di stoffa, indossate da una persona infetta, sono *estremamente efficaci* nel *proteggere le persone circostanti.* Questo, in Inglese, è detto "source control", ovvero "controllo alla fonte". Ed è il controllo alla fonte quello di cui si parla (o di cui si dovrebbe parlare) nel dibattito sulle mascherine *per il pubblico.*
 
@@ -32,11 +32,11 @@ Se una persona con COVID-19 tossisce su qualcuno ad una ventina di centimetri di
 
 I modelli matematici sviluppati dal nostro team, supportati da altra ricerca (Yan et al. 2019), suggeriscono che se la maggior parte delle persone indossano mascherine in pubblico, il fattore di trasmissione ("R effettivo"), può scendere sotto 1, arrestando la diffusione del virus. La mascherina non deve bloccare ogni singolo virus, ma più ne blocca, più basso è il valore effettivo di R.
 
-{% include image-r w="500" url="2020-04-19-tutti-in-maschera/image1.png" caption="Modello dell'impatto dell'uso delle mascherine sul fattore di riproduzione" %}
+{% include image.html w="500" file="/images/2020-04-19-tutti-in-maschera/image1.png" caption="Modello dell'impatto dell'uso delle mascherine sul fattore di riproduzione" %}
 
 Quanto la diffusione delle mascherine sia efficace dipende da tre fattori illustrati dal diagramma: quanto la maschera blocca il virus ('efficacia': l'asse orizzontale), la percentuale della popolazione che indossa le maschere ('aderenze': l'asse verticale), e il fattore di trasmissione della malattia (R0: le linee nere nel grafico). L'area in blu del diagramma indica un R0 minore di 1, necessario per sconfiggere l'epidemia. Anche se le maschere dovessero bloccare una porzione molto più piccola di particelle virali, la malattia potrebbe comunque essere controllata, ma l'intera popolazione o quasi dovrebbe indossare maschere.
 
-## Le scienze politiche dell'indossare mascherine
+## Mascherine e scienze politiche
 
 Come si può far sì che tutti o comunque la maggioranza delle persone indossino maschere? Beh, si può educarle e cercare di convincerle, ma un approccio più efficace è *imporre* che tutti indossino mascherine, che sia in contesti specifici come sui trasporti pubblici o nei negozi alimentari, o ancor meglio per qualunque motivo si esca da casa. La ricerca sui vaccini (Bradford and Mandich 2015) mostra che nelle aree in cui l'esenzione dai vaccini segue restrizioni più severe hanno una copertura vaccinale più alta. Lo stesso approccio sta ora venendo utilizzato per ottenere un'adozione più vasta delle mascherine, e risultati preliminari (Leffler et al. 2020) indicano che queste leggi in questo senso sono efficaci nel migliorare il rispetto della misura e stanno rallentando se non fermando la diffusione di COVID-19.
 
@@ -46,11 +46,11 @@ Un esperimento artificiale si ha quando un ricercatore divide un campione di per
 
 Un esperimento naturale è quando si studia qualcosa che accade al di fuori di un contesto controllato – ad esempio quando una nazione introduce una misura per incrementare l'utilizzo delle mascherine. La Corea del Sud, ad esempio, ha avuto una diffusione interna di COVID-19 che nelle settimane iniziali ha seguito la traiettoria dell'Italia. Verso la fine di febbraio, il governo ha coinciato a fornire una scorta regolare di mascherine a tutti i cittadini. Da quel momento tutto è cambiato. Mentre il numero di morti giornalieri in Italia ha cominciato a crescere a livelli terrificanti, quello della Corea del Sud ha invece cominciato *a diminuire*. Questo è il numero di casi attivi in Corea del Sud (in rosso) e in Italia (in blu); osservate cosa succede a inizio marzo, quando la distribuzione delle mascherine ha cominciato a fare effetto. (questa analisi è stata fatta da [Hyokon Zhiang](https://twitter.com/slowblogger) la visualizzazione da Reshama Shaik):
 
-{% include image-r w="500" url="2020-04-19-tutti-in-maschera/image2.png" caption="Paragone dei casi di COVID-19 tra Corea del Sud e Italia" %}
+{% include image.html w="500" file="/images/2020-04-19-tutti-in-maschera/image2.png" caption="Paragone dei casi di COVID-19 tra Corea del Sud e Italia" %}
 
 Gli esperimenti naturali sono scientificamente imperfetti, perché non c'è gruppo di controllo, quindi non possiamo affermare che alcun cambiamento sia dovuto alle mascherine. Alcune nazioni che hanno introdotto una politica sulle mascherine, hanno introdotto più o meno allo stesso tempo altre misure come un rigido distanziamento sociale, la chiusura delle scuole e la cancellazione degli eventi pubblici. Persino in quei casi, però, si possono trovare paragoni interessanti. Ad esempio, Austria e la confinante Repubblica Ceca hanno introdotto misure di distanziamento sociale nella stesso giorno, ma la Repubblica Ceca ha introdotto *anche* l'obbligo di indossamento delle mascherine. In Austria l'infezione ha continuato a peggiorare, mentre in Repubblica Ceca si è appiattita. Finché l'Austria ha introdotto leggi sulle mascherine qualche settimana più tardi e le due nazioni sono tornate su traiettorie simili.
 
-{% include image-r w="500" url="images/2020-04-19-tutti-in-maschera/image3.png" caption="Paragone dei casi di COVID-19 tra Repubblica Ceca e Austria" %}
+{% include image.html w="500" file="/images/2020-04-19-tutti-in-maschera/image3.png" caption="Paragone dei casi di COVID-19 tra Repubblica Ceca e Austria" %}
 
 Soprattutto: indipendentemente dal momento, in *tutte* le nazioni dove l'uso delle mascherine è stato incoraggiato per legge, o in cui le mascherine sono state distribuite alla popolazione, il numero di casi e di morti ha rallentato.
 
