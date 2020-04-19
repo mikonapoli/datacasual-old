@@ -2,7 +2,7 @@
 description: "Traduzione di 'Masks for all? The science says yes.' di Trisha Greenhalgh OBE e Jeremy Howard"
 toc: true
 layout: post
-- image: images/2020-04-12-masks-summary/image1.png
+image: images/2020-04-12-masks-summary/image1.png
 categories: [italian, covid19]
 ---
 
