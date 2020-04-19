@@ -1,5 +1,5 @@
 ---
-description: "Traduzione di 'Masks for all? The science says yes. di Trisha Greenhalgh OBE e Jeremy Howard"
+description: "Traduzione di 'Masks for all? The science says yes.' di Trisha Greenhalgh OBE e Jeremy Howard"
 toc: true
 layout: post
 categories: [italian, covid19]
