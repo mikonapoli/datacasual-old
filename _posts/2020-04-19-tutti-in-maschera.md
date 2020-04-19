@@ -1,4 +1,5 @@
 ---
+title: "Tutti in maschera? La scienza dice sì"
 description: "[Italian] Traduzione di 'Masks for all? The science says yes.' di Trisha Greenhalgh OBE e Jeremy Howard"
 toc: true
 layout: post
@@ -6,7 +7,6 @@ image: images/2020-04-19-tutti-in-maschera/image1.png
 categories: [italian, covid19]
 ---
 
-# Tutti in maschera? La scienza dice sì
 Tradotto dall'[originale](https://www.fast.ai/2020/04/13/masks-summary/) del prof. Trisha Greenhalgh OBE e di Jeremy Howard
 
 Non sapete cosa pensare a proposito delle mascherine? Certo, è una questione complicata, ma meno di quanto alcuni lascino intendere. Abbiamo esaminato la scienza disponibile (cfr. il nostro articolo [Face Masks Against COVID-19: An Evidence Review](http://up.fm/masks) &mdash; con non meno di 84 riferimenti bibliografici! &mdash; e [Face masks for the public during the covid-19 crisis](https://www.bmj.com/content/369/bmj.m1435)). In questo post riassiumiamo il punto di vista di diverse aree di ricerca, con la nostra interpretazione della faccenda.
