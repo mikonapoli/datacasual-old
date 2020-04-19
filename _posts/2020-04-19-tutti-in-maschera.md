@@ -51,7 +51,7 @@ Gli esperimenti naturali sono scientificamente imperfetti, perché non c'è grup
 
 {% include image w="500" url="2020-04-12-masks-summary/image3.png" caption="Paragone dei casi di COVID-19 tra Repubblica Ceca e Austria" %}
 
-Soprattutto: in indipendentemente dal momento e in *ogni* nazione in cui l'uso delle mascherine è stato incoraggiato per legge, o in cui le mascherine sono state distribuite alla popolazione, il numero di casi e di morti ha rallentato.
+Soprattutto: indipendentemente dal momento, in *tutte* le nazioni dove l'uso delle mascherine è stato incoraggiato per legge, o in cui le mascherine sono state distribuite alla popolazione, il numero di casi e di morti ha rallentato.
 
 ## Mascherine e scienze comportamentali
 
