@@ -1,11 +1,11 @@
 ---
+title: "Private FastPages on Kubernetes"
 description: "How I deployed FastPages as a tool for our data tribe to share information and insights on the private Kubernetes cluster at my workplace"
 toc: true
 layout: post
 categories: [fastpages, kubernetes]
 ---
 
-# Private FastPages on K8S
 This post is the very reason I decided myself to go back to blogging. I managed to do something that I considered relatively trivial, but let others know about it in the Fast.ai forums it turned out not to be that obvious after all. And writing about it, I realised that not even a year ago, I wouldn't have had the faintest idea of what I am talking about here.
 
 
