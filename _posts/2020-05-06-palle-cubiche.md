@@ -39,11 +39,13 @@ predittivo molto debole e non può essere utilizzato per predire un cambio di an
 
 3. Se non fosse stato tagliato ad arte, lo stesso modello ci dice che verso inizio dicembre l'intera popolazione mondiale è morta di COVID e non ce ne siamo accorti
 
-4. Sempre estendendo il nostro modello cubico, questa volta nel futuro, realizziamo che intorno al 20 maggio i morti iniziano
-a tornare in vita in numeri sempre più abbondanti
+4. Sempre estendendo il nostro "modello cubico", questa volta nel futuro, realizziamo che intorno al 20 maggio i morti iniziano a tornare in vita in numeri sempre più abbondanti
 
+Per capire cosa intendo negli ultimi due punti, basta osservare che una curva del tipo utilizzato nel nostro modello cubico ha, più o meno, una forma come in figura
 
-Certamente l'ultimo punto sostiene quanto detto da Trump a suo tempo che l'epidemia "scomparirà come fosse un miracolo", ma
+{% include image.html w="500" file="/images/2020-05-16-palle-cubiche/cubica.png" caption="Un modello cubico in azione..." %}
+
+Certamente tutto questo sostiene quanto detto da Trump a suo tempo che l'epidemia "scomparirà come fosse un miracolo", ma
 aspettarsi che i morti tornino in vita è forse un po' esagerato persino per lui. Ed è evidente che un modello che è sicuramente completamente sbagliato in 2 settimane, non ha alcun valore predittivo a una settimana.
 
 Ma il problema grave è che stiamo parlando di un organo di stato ufficiale che spara idiozie spacciandole per certezze.
