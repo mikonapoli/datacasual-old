@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://datacasual.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://datacasual.com/" rel="alternate" type="text/html" /><updated>2020-04-21T05:48:19-05:00</updated><id>https://datacasual.com/feed.xml</id><title type="html">datacasual</title><subtitle>Tales of an accidental data scientist.</subtitle><entry><title type="html">Tutti in maschera? La scienza dice sì</title><link href="https://datacasual.com/italian/covid19/2020/04/19/tutti-in-maschera.html" rel="alternate" type="text/html" title="Tutti in maschera? La scienza dice sì" /><published>2020-04-19T00:00:00-05:00</published><updated>2020-04-19T00:00:00-05:00</updated><id>https://datacasual.com/italian/covid19/2020/04/19/tutti-in-maschera</id><content type="html" xml:base="https://datacasual.com/italian/covid19/2020/04/19/tutti-in-maschera.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://datacasual.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://datacasual.com/" rel="alternate" type="text/html" /><updated>2020-05-06T04:13:18-05:00</updated><id>https://datacasual.com/feed.xml</id><title type="html">datacasual</title><subtitle>Tales of an accidental data scientist.</subtitle><entry><title type="html">Palle cubiche (minipost)</title><link href="https://datacasual.com/italian/covid19/2020/05/06/palle-cubiche.html" rel="alternate" type="text/html" title="Palle cubiche (minipost)" /><published>2020-05-06T00:00:00-05:00</published><updated>2020-05-06T00:00:00-05:00</updated><id>https://datacasual.com/italian/covid19/2020/05/06/palle-cubiche</id><content type="html" xml:base="https://datacasual.com/italian/covid19/2020/05/06/palle-cubiche.html">&lt;p&gt;In maniera più o meno legittima, in tempi di pandemia chiunque abbia avuto un minimo di infarinatura statistica (me compreso)
+si è dilettato a fare modelli di evoluzione del contagio. Come data scientist, e il mio passato da matematico aiuta, ho 
+imparato che una delle cose più importanti quando si produce un modello e cercare in tutti i modi di trovarne i limiti e comunicare
+le possibili fonti di errore. Tutti i modelli sono sbagliati, e non preoccuparsi delle conseguenze di questi errori, può e spesso
+ha effetti catastrofici (ci sono decine di esempi, soprattutto con gli algoritmi più sofisticati, ma questo è un discorso per 
+una lunga serie di post).&lt;/p&gt;
+
+&lt;p&gt;Particolarmente grave, quindi, quando un organo ufficiale si vanta a sproposito di un proprio modello, come in questo caso&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;To better visualize observed data, we also continually update a curve-fitting exercise to summarize COVID-19&amp;#39;s observed trajectory. Particularly with irregular data, curve fitting can improve data visualization. As shown, IHME&amp;#39;s mortality curves have matched the data fairly well. &lt;a href=&quot;https://t.co/NtJcOdA98R&quot;&gt;pic.twitter.com/NtJcOdA98R&lt;/a&gt;&lt;/p&gt;&amp;mdash; CEA (@WhiteHouseCEA) &lt;a href=&quot;https://twitter.com/WhiteHouseCEA/status/1257680258364555264?ref_src=twsrc%5Etfw&quot;&gt;May 5, 2020&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;L’account del tweet (che per i non anglofoni essenzialmente dice che grazie alle nuove informazioni ottenute su COVID hanno 
+costruito un “modello cubico” che funziona molto bene e che, come implica la figura, può essere usato per predirre l’andamento 
+dell’epidemia negli USA) appartiene al “Council of Economic Advisers” della Casa Bianca, un organo ufficiale 
+del governo degli USA.&lt;/p&gt;
+
+&lt;p&gt;A molti è saltato subito agli occhi che il “modello cubico” sembra non essere altro che un fitting polinomiale di 
+terzo grado fatto in pochi secondi con Excel (qui, ad esempio il commento di Nate Silver, tanto per appellarsi all’autorità)&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Like this took me 45 seconds and it seems to match the description of the &amp;quot;cubic model&amp;quot; quite well. &lt;a href=&quot;https://t.co/s91O6CTkw1&quot;&gt;pic.twitter.com/s91O6CTkw1&lt;/a&gt;&lt;/p&gt;&amp;mdash; Nate Silver (@NateSilver538) &lt;a href=&quot;https://twitter.com/NateSilver538/status/1257477043970887682?ref_src=twsrc%5Etfw&quot;&gt;May 5, 2020&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Ma il problema non è nemmeno tanto l’utilizzo di un modello semplice. Ma che il modello è fatto ad arte per mostrare che 
+l’epidemia è quasi finita e quindi è il momento di riaprire tutto.&lt;/p&gt;
+
+&lt;p&gt;Che problemi ci sono con il nostro “modello cubico”?&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Prima di tutto utilizza come unica fattore predittivo del numero di morti giornaliero… la data. La cosa va anche bene
+quando si vuole mostrare cosa succederà nel breve termine &lt;strong&gt;se niente cambia nell’andamento attuale&lt;/strong&gt;, ma ha un valore
+predittivo molto debole e non può essere utilizzato per predire un cambio di andamento
+(questo, ad esempio è un errore che ho visto fare a fin troppi matematici che a inizio epidemia, hanno fatto nel tentare di 
+capire quando sarebbe arrivato “il picco” o, per i più raffinati “il flesso”; purtroppo sapere cos’è un’esponenziale o un 
+modello logistico non attrezza a fare previsioni in pratica).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Secondo questo modello, tra una settimana circa si arriva a zero contagi negli USA. Questo è il messaggio che si vuole far 
+passare, ma è quanto meno molto poco probabile&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Se non fosse stato tagliato ad arte, lo stesso modello ci dice che verso inizio dicembre l’intera popolazione mondiale è morta
+di COVID e non ce ne siamo accorti&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sempre estendendo il nostro modello cubico, questa volta nel futuro, realizziamo che intorno al 20 maggio i morti iniziano
+a tornare in vita in numeri sempre più abbondanti&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Certamente l’ultimo punto sostiene quanto detto da Trump a suo tempo che l’epidemia “scomparirà come fosse un miracolo”, ma
+forse questo è un po’ esagerato. Ed è evidente che un modello che è sicuramente completamente sbagliato in 2 settimane, non ha
+alcun valore predittivo a una settimana.&lt;/p&gt;
+
+&lt;p&gt;Ma il problema grave è che stiamo parlando di un organo di stato ufficiale che spara idiozie spacciandole per certezze.&lt;/p&gt;
+
+&lt;p&gt;Palle cubiche, appunto.&lt;/p&gt;
+
+&lt;p&gt;Elon Musk che con un solo tweet ha prodotto miliardi di dollari di danni a Tesla, ma qui si tratta di persone che
+moriranno a causa di questo tweet.&lt;/p&gt;
+
+&lt;p&gt;Questo non è e non può essere accettabile.&lt;/p&gt;
+
+&lt;p&gt;M.&lt;/p&gt;
+
+&lt;p&gt;PS: non posso esimermi dal ricordare che anche in Italia &lt;a href=&quot;https://www.corriere.it/economia/lavoro/20_marzo_30/coronavirus-italia-quando-si-azzereranno-contagi-previsioni-regione-regione-ae9099dc-7264-11ea-bc49-338bb9c7b205.shtml&quot;&gt;alcuni economisti&lt;/a&gt;
+hanno a suo tempo previsto zero contagi per questa settimana (e a quanto pare in Piemonte non ci sono più contagi già da 2 o 3
+settimane, si vede che ci siamo sbagliati tutti). A onor del vero, all’inizio gli autori hanno sottolineato che la loro era
+una semplice analisi che non andava usata in senso predittivo. Ma con l’attenzione mediatica (e il Corriere è responsabile in 
+questo caso) l’iniziale cautela è stata presto abbandonata.&lt;/p&gt;</content><author><name></name></author><summary type="html">In maniera più o meno legittima, in tempi di pandemia chiunque abbia avuto un minimo di infarinatura statistica (me compreso) si è dilettato a fare modelli di evoluzione del contagio. Come data scientist, e il mio passato da matematico aiuta, ho imparato che una delle cose più importanti quando si produce un modello e cercare in tutti i modi di trovarne i limiti e comunicare le possibili fonti di errore. Tutti i modelli sono sbagliati, e non preoccuparsi delle conseguenze di questi errori, può e spesso ha effetti catastrofici (ci sono decine di esempi, soprattutto con gli algoritmi più sofisticati, ma questo è un discorso per una lunga serie di post).</summary></entry><entry><title type="html">Tutti in maschera? La scienza dice sì</title><link href="https://datacasual.com/italian/covid19/2020/04/19/tutti-in-maschera.html" rel="alternate" type="text/html" title="Tutti in maschera? La scienza dice sì" /><published>2020-04-19T00:00:00-05:00</published><updated>2020-04-19T00:00:00-05:00</updated><id>https://datacasual.com/italian/covid19/2020/04/19/tutti-in-maschera</id><content type="html" xml:base="https://datacasual.com/italian/covid19/2020/04/19/tutti-in-maschera.html">&lt;blockquote&gt;
   &lt;p&gt;Tradotto dall’&lt;a href=&quot;https://www.fast.ai/2020/04/13/masks-summary/&quot;&gt;originale&lt;/a&gt; del prof. Trisha Greenhalgh OBE e di Jeremy Howard&lt;/p&gt;
 &lt;/blockquote&gt;
 
