@@ -1,4 +1,264 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://datacasual.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://datacasual.com/" rel="alternate" type="text/html" /><updated>2020-05-08T08:27:45-05:00</updated><id>https://datacasual.com/feed.xml</id><title type="html">datacasual</title><subtitle>Tales of an accidental data scientist.</subtitle><entry><title type="html">The masked analyst</title><link href="https://datacasual.com/data-analysis/covid19/2020/05/07/masked-analyst.html" rel="alternate" type="text/html" title="The masked analyst" /><published>2020-05-07T00:00:00-05:00</published><updated>2020-05-07T00:00:00-05:00</updated><id>https://datacasual.com/data-analysis/covid19/2020/05/07/masked-analyst</id><content type="html" xml:base="https://datacasual.com/data-analysis/covid19/2020/05/07/masked-analyst.html">&lt;!--
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://datacasual.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://datacasual.com/" rel="alternate" type="text/html" /><updated>2020-06-03T10:47:29-05:00</updated><id>https://datacasual.com/feed.xml</id><title type="html">datacasual</title><subtitle>Tales of an accidental data scientist.</subtitle><entry><title type="html">Fundamentals of Data Visualisation</title><link href="https://datacasual.com/data-science/2020/06/03/data-vis-fundamentals.html" rel="alternate" type="text/html" title="Fundamentals of Data Visualisation" /><published>2020-06-03T00:00:00-05:00</published><updated>2020-06-03T00:00:00-05:00</updated><id>https://datacasual.com/data-science/2020/06/03/data-vis-fundamentals</id><content type="html" xml:base="https://datacasual.com/data-science/2020/06/03/data-vis-fundamentals.html">&lt;p&gt;Visualising data is all too often an overlooked skill of data people, especially by the data scientist/machine learning engineer fraction of the population.&lt;/p&gt;
+
+&lt;p&gt;This is somewhat similar to what happens with the front end/back end divide in software engineering. Just as I don’t believe in true full stack engineers, because the amount of tools and speed at which they evolve is simply too much for a single person to master at the same time, I don’t believe that it is reasonable to expect a &lt;a href=&quot;https://en.wikipedia.org/wiki/Unicorn&quot;&gt;single data professional&lt;/a&gt; to be an expert in all the aspects of the data process.&lt;/p&gt;
+
+&lt;p&gt;At the same time, I do believe that software engineers who can cover the fundamentals of full stack development while maintaing a deeper expertise in some aspect or another exist, and I call them good software engineers. 
+In the same fashion, I think that good data professionals should have a good working understanding of all the steps of the data process no matter whether they are generalists or hyper specialised.&lt;/p&gt;
+
+&lt;p&gt;This is especially true for data visualisation as it is fundamental in at least two very distinct stages at the opposite ends of the data process, so I believe it is very relevant to all data professionals.&lt;/p&gt;
+
+&lt;h3 id=&quot;exploratory-data-analysis&quot;&gt;Exploratory Data Analysis&lt;/h3&gt;
+
+&lt;p&gt;When we first look at our data, looking for patterns, and trying to spot problems, it is important to be able to observe our data from all angles.&lt;/p&gt;
+
+&lt;p&gt;Data visualisation is a powerful tool to grasp multidimensional information. In simpler words, it is a way of squeezing a lot of data into a container small enough for our brain to appreciate and spot the patterns. As they say “a picture is worth a thousand data points”.&lt;/p&gt;
+
+&lt;p&gt;Summary statistics and centrality measures can serve the same functions, but they are rarely enough, unless we can afford to make a lot of assumptions on about the shape of our data.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, summary statistics can easily hide problem.&lt;/p&gt;
+
+&lt;p&gt;Let’s look at one quick example.&lt;/p&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://www.autodeskresearch.com/sites/default/files/The%20Datasaurus%20Dozen.zip&quot;&gt;simple dataset&lt;/a&gt; is composed of two numerical variables (X and Y) with the following statistics:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Mean of X = 54.26
+Mean of Y = 47.83
+Standard deviation of X = 16.76
+Standard deviation of Y = 26.93
+Correlation = -0.06
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Just looking at this numbers, the dataset looks utterly uninteresting, but this is what the dataset looks like as a scatterplot:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://3.bp.blogspot.com/-dYWcbKVsiGY/V8RFmMFnLjI/AAAAAAAAG9Y/Qr_PGmR0V8MhSXb8-rBdAsdciny-oql2ACLcB/s1600/1datasaurus.png&quot; alt=&quot;The datasaurus&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Just to push the point further, these are a series of datasets that have all &lt;em&gt;exactly the same statistics&lt;/em&gt;, but as you can see look very different.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d2f99xq7vri1nk.cloudfront.net/DataDino-600x455.gif&quot; alt=&quot;The datasaurus dozen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want to learn more about &lt;a href=&quot;http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html&quot;&gt;the datasaurus origin&lt;/a&gt; and its evolution into a “datasaurus dozen” (notice that we are actually looking at 13 different datasets), have a look at this &lt;a href=&quot;https://www.autodeskresearch.com/publications/samestats&quot;&gt;excellent article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;flash flash-warn&quot;&gt;
+    &lt;svg class=&quot;octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap&quot; viewBox=&quot;0 0 10 16&quot; version=&quot;1.1&quot; width=&quot;10&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M10 7H6l3-7-9 9h4l-3 7 9-9z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    &lt;strong&gt;Important: &lt;/strong&gt;Always take a look at your data. Summary statistics are not enough, especially at the very first stages of your exploration.
+&lt;/div&gt;
+
+&lt;h3 id=&quot;communicating-results&quot;&gt;Communicating results&lt;/h3&gt;
+
+&lt;p&gt;The ultimate goal of using data, so the very essence of the job of a data professional, is to inform decisions with what the data is telling us. No matter what amazing insight we have gained from our data, if we are not able to communicate it, it will be worthless. Even worse, if the insights are incorrectly communicated, they might create more damage than if they hadn’t been spotted at all.&lt;/p&gt;
+
+&lt;p&gt;Good data visualisations help conveying a message, since they can reduce the noise and focus the attention on whatever insight the author of the visualisation is trying to communicate.&lt;/p&gt;
+
+&lt;p&gt;Exploratory data analysis is a huge topic in itself, so here I want focus on this step, the communication of insights, and will look at what I consider three fundamental rules to pay attention to.&lt;/p&gt;
+
+&lt;h2 id=&quot;rule-n1-start-with-why-and-who&quot;&gt;Rule n.1: Start with why, and who&lt;/h2&gt;
+
+&lt;p&gt;This is really the first rule of any kind of presentation, not only data visualisation.&lt;/p&gt;
+
+&lt;p&gt;Data visualisation is not (or should not be) a pretty picture for its own sake: it is made to communicate something to someone. It is fundamental when creating visualisations to start and always keep in mind both the message and the intended audiance.&lt;/p&gt;
+
+&lt;p&gt;A good exercise is to explicitly articulate &lt;em&gt;why&lt;/em&gt; the visualisation is being made before actually building it. It is very unlikely we will be able to convey a message we are not able to articulate to ourselves.&lt;/p&gt;
+
+&lt;p&gt;Even if the message is extremely clear, there is no single way of building a visualisation. Context and audience matter. A lot.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-cautionary-tale&quot;&gt;A cautionary tale&lt;/h3&gt;
+
+&lt;p&gt;On the morning of the 27 of January 1986, NASA managers of the Marshall Space Center were having a teleconference to address concerns about a Shuttle launch that had been rescheduled from that morning to the next day because of weather issues.&lt;/p&gt;
+
+&lt;p&gt;Among other things, they were addressing concerns that the engineering team at Morton Thiokol Inc., the company that had produced the solid rocket boosters of the Shuttle, had about the effects that the cold temperatures forecasted for the next day might have on the O-Rings of the boosters.&lt;/p&gt;
+
+&lt;p&gt;The engineers at MTI presented this chart to illustrate their concerns on the topic:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://history.nasa.gov/rogersrep/v5p896.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At the time NASA hadn’t been recommended anything explicitely (this would happen later in the afternoon), as per later testimonies, they were just “looking at the engineering data”, so they decided that those concerns were negligible and went ahead with the launch.&lt;/p&gt;
+
+&lt;p&gt;The next day the Challenger launched as scheduled.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/4/46/Challenger_breakup.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Although it has been speculated, it is probably not the case that the low temperature has been the main cause of the disaster, so it’s an exaggeration to say that bad data visualisation has destroyed the Challenger, but it is quite clear that the chart above does not bring the message across.&lt;/p&gt;
+
+&lt;p&gt;There are a number of capital mistakes, but to stay on topic of rule n.1, if you want to show the risk of damage to the O-Rings deriving from low temperatures, then:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t make the temperature hard to read: that’s the main reason you are making this visualisation&lt;/li&gt;
+  &lt;li&gt;Don’t hide the legend that clarifies the damage to the O-rings in another slide: you are hiding your message&lt;/li&gt;
+  &lt;li&gt;Don’t sort by time: it’s irrelevant here, and it is shifting the attention from the message you are trying to convey&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And on the topic of “know your audience”: that chart has been prepared to be shown to NASA management deciding on the safety of a launch, not on a magazine for the general public, you really don’t need all those rockets boosters pictures.&lt;/p&gt;
+
+&lt;p&gt;As &lt;a href=&quot;https://www.edwardtufte.com/tufte/&quot;&gt;Tufte&lt;/a&gt; (famous statistician and data vis expert) has possibly overemphasized, the message “low temperatures can damage the o-rings more than we feel confortable with” might have been better served by something like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://project-orion-production.s3.amazonaws.com/uploads/content_picture/2928/VEp45_ring_damage2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(Image coming from &lt;a href=&quot;https://stanfordmag.org/contents/elemental-evidence&quot;&gt;this&lt;/a&gt; Stanford magazine article)&lt;/p&gt;
+
+&lt;p&gt;Whatever the correct way of displaying the message is, in the original chart you can spot a huge red flag in the lower left corner, that reads:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Information on this page was prepared to support an oral presentation and cannot be considered complete without the oral discussion&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;Whenever you spot a warning of this kind, it is often a sign that the authors don’t feel confident about their presentation or data visualisation or don’t want to assume responsability for that. Try not to be that author.&lt;/p&gt;
+
+&lt;div class=&quot;flash flash-warn&quot;&gt;
+    &lt;svg class=&quot;octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap&quot; viewBox=&quot;0 0 10 16&quot; version=&quot;1.1&quot; width=&quot;10&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M10 7H6l3-7-9 9h4l-3 7 9-9z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    &lt;strong&gt;Important: &lt;/strong&gt;Make sure your data visualisations can stand on their legs and can convey the intended message to the intended audience.
+&lt;/div&gt;
+
+&lt;h2 id=&quot;rule-n2-dont-lie&quot;&gt;Rule n.2: Don’t lie&lt;/h2&gt;
+
+&lt;p&gt;Since any single element of a data visualisation explictly or implicitly carries meaning, there are also countless possibilities of lying with it.&lt;/p&gt;
+
+&lt;p&gt;When I say “lying”, I mean it in a broad “creating a wrong interpretation of the data in the audience” kind of way, as it does not need to be intentional.&lt;/p&gt;
+
+&lt;p&gt;Since every data visualisation should have a clear message and intended audience, there are a number of ways of distorting that message.&lt;/p&gt;
+
+&lt;p&gt;Rather than talking in abstract about how not to lie, I find more useful to look at examples of lying charts. Whether the author intended to do that or not.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-menagerie-of-lying-charts&quot;&gt;A menagerie of lying charts&lt;/h3&gt;
+
+&lt;h4 id=&quot;lying-with-data-and-scales&quot;&gt;Lying with data and scales&lt;/h4&gt;
+
+&lt;p&gt;The first and most obvious way of lying with a data visualisation is by manipulating or omitting the data itself. Take a look at the following graph, that shows how the pollution has dropped since a certain party has taken power (the country and party are not important in this context).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/c01ef9df471b304365ce816879ddeb0e/tumblr_q0iinylpaJ1sgh0voo1_1280.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course a distracted voter would not notice that three years (when pollution actually went up) are missing from the chart.&lt;/p&gt;
+
+&lt;p&gt;Also notice that the same chart pulls the old trick of “let’s remove the 0 from the y axis so that a 2% change looks like a reduction of more than 50%”. Two lies for one.&lt;/p&gt;
+
+&lt;p&gt;As I said, lying with charts does not need to be intentional: speaking of y axes and scales, you can also err in the opposite direction, by being too honest and mixing quantities that should not be on the same scale.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/7fbfeacf7649b5d16ad4e938c040a6b1/tumblr_p79fyvl1id1sgh0voo1_1280.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The result is a chart that is technically correct, but does not convey any useful information (at least for what concerns the temperature).&lt;/p&gt;
+
+&lt;h4 id=&quot;lying-with-mappings-and-aesthetics&quot;&gt;Lying with mappings and aesthetics&lt;/h4&gt;
+
+&lt;p&gt;Next on our list are the so called “mappings”, i.e. the way we project dimensions of our data (the features, if you will) onto the characteristic of the graphical objects of the chart (the “aesthetics”).&lt;/p&gt;
+
+&lt;p&gt;As usual, this can be clumsy/unintentional, like mapping an ordinal variable like binned years onto a non gradient color palette of a stacked bar chart, resulting in a chart that is definitely not easy to read (at least in the temporal dimension):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/367956f1a6cfaf7fdb06a1d76eed7083/tumblr_puxyfcMDHr1sgh0voo1_1280.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or it can be absolutely blatant, like using a bar chart and implying a mapping that is not there, 
+pretending that the mapped feature is represented by the height of the bars (which is clearly not the case)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/c22b3d1242d4e11feea984bba7e1c9e5/tumblr_peu9q9gFzJ1sgh0voo1_1280.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or it can be more sneaky, like mapping an ordinal variable onto an ordinal aesthetic (the position on the x axis), but sorting it according to something else, effectively treating an ordinal variable like a categorical, non ordered, one. Notice how the days on the x axis are not in chronological order, to make a decreasing trend appear out of thin air.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/9da9ffe50c7ce21cce174d268acfb048/tumblr_qa67ofwBML1sgh0voo1_1280.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the most common way of lying with aestetics, which is mostly uninententional, is to use the wrong colours. Picking the right colours for your data visualisation is no easy task, but one rule of thumb is: never use the rainbow colour palette.&lt;/p&gt;
+
+&lt;p&gt;There are a lot of reasons for this, but the summary is that it has unintuitive hues shift (and we subconsciously associate meanings to colours) and that it can have similar hues for values that are actually far away on the scale. As an example, look how similar the pink and red hues (which are at the opposite ends of the scale) are in the following chart.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.poynter.org/wp-content/uploads/2013/09/L5_Figure12.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;lying-with-geoms&quot;&gt;Lying with geoms&lt;/h4&gt;
+
+&lt;p&gt;Next element that can be used to make a lying data visualisation is the choice of geometric object (or “geom”, in the language of the &lt;a href=&quot;https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf&quot;&gt;grammar of graphics&lt;/a&gt;). By far the most common offender is the use of a pie chart (or even worse, a donut chart) for categorical variables with a lot of categories.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/374ff02f40370889bea889eef62a14d9/tumblr_pzboikcYPx1sgh0voo1_1280.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Although there is some controversy on this point, the reason why pie chart should be avoided is that they use angles to represent quantities, and the human eye is very bad at estimating angles. This problem is exacerbated with donut charts, where the missing central circle makes understanding the quantities even harder. In general, a pie chart should only be used for no more than 2-3 categories, when the quantities are very different and the actual numbers are explicitly presented or only a rough comparison is needed (and as said before: your visualisation should be able to stand on its legs, having to write down the actual data is a red flag). Dount charts and gauges should only be considered eye candy for raw values.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, if you really want to make it nigh impossible to evaluate quantities, using a 3D pie chart is a great ways to distort the sizes of the slices to make comparisons look whatever you want them to look.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/dd3b99ccbaec2d7e16fd752912bfbe38/tumblr_oi79u8H5cG1sgh0voo1_1280.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In general the addition of 3D to a visualisation is always a bad idea, as it adds nothing and often actively distorts the message.&lt;/p&gt;
+
+&lt;p&gt;Let it be noted that I blame MS Office for the all too frequent presence of 3D charts.&lt;/p&gt;
+
+&lt;p&gt;Wrong geoms are not restricted to 3D and pie charts though: in the following graph, for example, the choice of a line plot implies the presence of a trend among independent categories (on the x axis we have a categorical variable, not an ordinal one). Line plots are very useful for ordinal vairables and especially time variables, but not in this case.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/40b2bf7e70d3a562cf451e185efa3fef/1024c712f4dc1934-27/s2048x3072/85da1316522e8813367b7ed1d5cab6b8b30dfafb.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice that in the chart there is no real mistake, but the line suggests a relationship between cities that are close on the x axis, while they are just sorted by the percentage of AC ownership in households.&lt;/p&gt;
+
+&lt;p&gt;Another common class of lying geoms is pictograms in infographics. The problem here is that more often than not we see the underlying variable mapped to the radius of the picture, while looking at pictures we instinctively compare the areas, which go with the square of the radius. Notice, for example, how in the following infographics, in the “Skipping breakfast” section a bowl which is four times larger than the one next to it is used to represent a quantity that is roughly twice the other.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thumbnails-visually.netdna-ssl.com/london-worker-index-infographic_5494896c61361_w1500.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A better solution is actually used in the “office romance” section (second to last) of the same infographic, where the dimension is mapped onto the number of copies of the same picture. Less visually appealing for sure, but more truthful. An alternative solution would be mapping the variable to the actual area of the picture, but that makes the comparison harder to make (because we are worse at comparing areas), unless the quantity itself is an area.&lt;/p&gt;
+
+&lt;p&gt;Good infographics are tricky to make.&lt;/p&gt;
+
+&lt;h4 id=&quot;lying-with-other-elements&quot;&gt;Lying with other elements&lt;/h4&gt;
+
+&lt;p&gt;If you really do not want to lie with the chart itself, you still have the possibility of using the additional elements, like labels, scales, legends and so on.&lt;/p&gt;
+
+&lt;p&gt;This is often done by omission.&lt;/p&gt;
+
+&lt;p&gt;I am pretty sure that “label your axis” is a mantra that we have all heard at school, but what better way to produce a visualisation that has really little explanatory power, but gives a sense of “backed up by data” to what is effectively a marketing ad?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://storage.googleapis.com/gweb-cloudblog-publish/images/google-cloud-pokemon-go-1kwkj.max-700x700.PNG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Another possibility is to put the legend far away from the actual chart, so that the eye constantly has to go back and forth before essentially giving up. For maximum effect, remove any number, sort the legend in an imperscrutable way, adopt a colour palette that has several similar hues for unrelated categories and, of course, use a donut chart for many similar quantities.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://66.media.tumblr.com/cc32a4f450a6d1960bf9b7ff1b274d32/tumblr_q8isvmN57E1sgh0voo1_1280.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or if you really, really want to go overboard, add a messed up mapping, and you have successfully achieved The Sun level of data visualisation&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&amp;quot;Is 34 bigger or smaller than 14?&amp;quot;&lt;br /&gt;&amp;quot;Smaller. Definitely smaller&amp;quot;&lt;br /&gt;&amp;quot;What about zero?&amp;quot;&lt;br /&gt;&amp;quot;Zero&amp;#39;s a bit less than 34 but it&amp;#39;s much more than 22&amp;quot; &lt;a href=&quot;https://t.co/qWkC7rkK2l&quot;&gt;pic.twitter.com/qWkC7rkK2l&lt;/a&gt;&lt;/p&gt;&amp;mdash; Arieh Kovler (@ariehkovler) &lt;a href=&quot;https://twitter.com/ariehkovler/status/873091140274110464?ref_src=twsrc%5Etfw&quot;&gt;June 9, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Important: Unless you really know what you are doing, avoid pie charts and donut charts and avoid the rainbow colour palette. Pay attention to all the elements of your data visualisation.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;rule-n3-reduce-the-noise-amplify-the-signal&quot;&gt;Rule n.3: Reduce the noise, amplify the signal&lt;/h2&gt;
+
+&lt;p&gt;Edward Tufte, whom I have mentioned while talking about the Challenger disaster, coined the term “Chartjunk” to refer to all the unnecessary elements of the chart that distract from the data itself. “Maximising the the data-ink ratio” is one of Tufte’s rule, by which he means that we should consider reduce as much as possible all the “ink” (this was an era when data visualisation tended not to sit on a screen) that is not representing the data. This is a very good rule of thumb, and in the process of developing a good aestethic for effective data visualisation I strongly advise to practice the art of minimalist charts. The problem is that this can easily go &lt;a href=&quot;http://www.perceptualedge.com/articles/visual_business_intelligence/sometimes_we_must_raise_our_voices.pdf&quot;&gt;too far&lt;/a&gt; if followed to the letter. The idea behind my 3rd rule is to remove whatever distracts and add whatever conveys the message. It is true that we should let the data speak for itself, but data has a very faint voice, and we should make sure that its whisper is heard loud and clear.&lt;/p&gt;
+
+&lt;p&gt;The following is often found as an example of bad visualisation, due to the very low data-ink ratio and the amount of chartjunk.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://visualoop.com/media/2017/06/diamonds-1040x917.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I actually disagree: this is a visualisation made for a Time magazine issue dedicated to the price of diamonds. Its message is extremely clear (the price of diamonds has fallen), and its intended audience are the readers of Time magazine, not diamond traders; in this case even the actual numbers are probably not that important, if not to convey some sense of scale.&lt;/p&gt;
+
+&lt;p&gt;The visualisation clearly conveys the intended message to the intended audience and does so capturing the attention in a way more effective way than a boring and clean chart would have made. As such, I consider it an excellent storytelling data visualisation.&lt;/p&gt;
+
+&lt;div class=&quot;flash flash-warn&quot;&gt;
+    &lt;svg class=&quot;octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap octicon octicon-zap&quot; viewBox=&quot;0 0 10 16&quot; version=&quot;1.1&quot; width=&quot;10&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M10 7H6l3-7-9 9h4l-3 7 9-9z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+    &lt;strong&gt;Important: &lt;/strong&gt;The most important thing is that your message is clear. Remove what distracts from it and add elements that emphasize it. But Rule n.1 and 2 take precedence.
+&lt;/div&gt;
+&lt;blockquote&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Data visualisation is a vast field (in which I am not an expert) and a deep rabbit hole to look into, but I hope to have been able to condense into my three rules some simple fundamental principles that can help you making good data visualisation independently of your role, experience and tools of choice. I find that these set of rules are a useful lens that help me understand the thinking behind a lot of what I read on the topic, which at the same time, makes it easier to learn. Hopefully it will work for you too.&lt;/p&gt;
+
+&lt;p&gt;M.&lt;/p&gt;
+
+&lt;h2 id=&quot;additional-material&quot;&gt;Additional material&lt;/h2&gt;
+
+&lt;p&gt;If you want to delve deeper into the topic, I suggest to have a look at the following material, in no particular order. No affiliate links.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.autodeskresearch.com/publications/samestats&quot;&gt;Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing&lt;/a&gt; the paper about the “Datasaurus dozen”&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.edwardtufte.com/tufte/&quot;&gt;Edward Tufte’s website&lt;/a&gt;. Tufte’s a recognised name, although a bit extreme in his views sometimes.&lt;/li&gt;
+  &lt;li&gt;On the subject of finding the “why” and “who” of data visualisations the booklet &lt;a href=&quot;https://makingdatavisual.github.io/&quot;&gt;Making Data Visual&lt;/a&gt; presents the interesting concept of “data interview”. I think it is a nice little read.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://viz.wtf/&quot;&gt;viz.wtf&lt;/a&gt; your daily dose of graph “mistakes”, most of the examples I used are coming from this website&lt;/li&gt;
+  &lt;li&gt;A very good and detailed &lt;a href=&quot;https://towardsdatascience.com/the-art-of-effective-visualization-of-multi-dimensional-data-6c7202990c57&quot;&gt;Medium article&lt;/a&gt; on visualising data in high dimensions, with a lot of good advice&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.co.uk/Visual-Storytelling-Introduction-Visualization-Addison-Wesley/dp/0321933176&quot;&gt;Visual storytelling with D3&lt;/a&gt;, although specifically aimed at D3.js, the author is one of the data journalists behind the excellent visualisations at &lt;a href=&quot;https://fivethirtyeight.com/&quot;&gt;538&lt;/a&gt; and the book contains a lot of general good advice&lt;/li&gt;
+  &lt;li&gt;A discussion on when “eliminating chartjunk” can &lt;a href=&quot;http://www.perceptualedge.com/articles/visual_business_intelligence/sometimes_we_must_raise_our_voices.pdf&quot;&gt;go too far&lt;/a&gt; (this is the reason behind the “amplify the signal” part of rule n.3 we have talked about). And a &lt;a href=&quot;https://eagereyes.org/blog/2013/definition-chart-junk&quot;&gt;sensible improvement&lt;/a&gt; on Tufte’s definition of chartjunk&lt;/li&gt;
+  &lt;li&gt;The original paper on the &lt;a href=&quot;https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf&quot;&gt;layered grammar of graphics&lt;/a&gt;, which has given us &lt;code class=&quot;highlighter-rouge&quot;&gt;ggplot&lt;/code&gt;. Extremely useful to understand what data plots &lt;em&gt;are&lt;/em&gt; from a technical points of view and to get the hang of the best plotting libraries. From the same author of the Medium post on the visualisations of high dimensional data, we have &lt;a href=&quot;https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149&quot;&gt;one specifically on the same topic&lt;/a&gt;, but specifically aimed at explaining the grammar of graphics approach. Very useful even if R and ggplot are not your thing&lt;/li&gt;
+  &lt;li&gt;The podcast Data Stories and in particular the &lt;a href=&quot;https://datastori.es/119-color-with-karen-schloss/&quot;&gt;episode dedicated to colours&lt;/a&gt;. Although it is not superexciting, the podcasts contains a lots of gems&lt;/li&gt;
+  &lt;li&gt;The &lt;a href=&quot;https://link.springer.com/book/10.1007/978-3-319-55444-0&quot;&gt;Data Science Design Manual&lt;/a&gt; (free to download from Springer’s website for the time being). And in particular the chapter on exploratory data analysis and data visualisation. The whole book is a bit dated in its views in my opinion, but it is a good organised review of the data process&lt;/li&gt;
+  &lt;li&gt;Darrell Huff’s &lt;a href=&quot;https://www.amazon.co.uk/dp/0393310728/ref=reader_auth_dp&quot;&gt;How to lie with statistics&lt;/a&gt; a classic and a must read for every data professional&lt;/li&gt;
+  &lt;li&gt;More specifically dedicated to data plots, &lt;a href=&quot;https://www.amazon.co.uk/How-Charts-Gerald-Everett-Jones/dp/0996543864/ref=dp_ob_title_bk&quot;&gt;How to lie with charts&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">Visualising data is all too often an overlooked skill of data people, especially by the data scientist/machine learning engineer fraction of the population.</summary></entry><entry><title type="html">The masked analyst</title><link href="https://datacasual.com/data-science/covid19/2020/05/07/masked-analyst.html" rel="alternate" type="text/html" title="The masked analyst" /><published>2020-05-07T00:00:00-05:00</published><updated>2020-05-07T00:00:00-05:00</updated><id>https://datacasual.com/data-science/covid19/2020/05/07/masked-analyst</id><content type="html" xml:base="https://datacasual.com/data-science/covid19/2020/05/07/masked-analyst.html">&lt;!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
